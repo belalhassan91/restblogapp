@@ -8,7 +8,7 @@ const ejs  = require('ejs');
 //-------------------------------------------------------------------    
 //Configure App
 mongoose.connect('mongodb://localhost:27017/blogapp', {useNewUrlParser: true, useUnifiedTopology: true});
-app.set("view engine",ejs);
+app.set('view engine', 'ejs'); 
 app.use(express.static("public")); //we can serve custom style sheets
 /** bodyParser.urlencoded(options)
  * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
@@ -30,6 +30,33 @@ var blogSchema = new mongoose.Schema({
 
 var Blog = mongoose.model("Blog",blogSchema);
 //-------------------------------------------------------------------
+//First Insert
+// Blog.create({
+//     title: "Doc1",
+//     image: "https://www.google.com/search?q=images&sxsrf=ACYBGNSLNpQOeszYqN99KFoVdfNH0YTSTQ:1578084678435&tbm=isch&source=iu&ictx=1&fir=aT1lQMo5nzpYfM%253A%252CpFs_4Fcq5AgpmM%252C_&vet=1&usg=AI4_-kRn00tCo2yLOqdsKFKZLLtDzoFynw&sa=X&ved=2ahUKEwjN07vFp-jmAhWy6uAKHaM6CNsQ9QEwAHoECAoQLw#imgrc=aT1lQMo5nzpYfM:",
+//     body:"beautidul landscape"
+// },function (err,blog) {
+//     if(err){
+//         console.log("Can't insert new data");
+//         console.log(err);
+//     }else {
+//         console.log(blog)
+//     }
+// });
+//-------------------------------------------------------------------
 //RESTful Routes
+app.get("/",(req,res) => {
+    res.redirect("/blogs");
+})
 
+app.get("/blogs",(req,res) => {
+    Blog.find({},(err,blogs)=>{
+        if(err){
+            console.log(err);
+        }else{
+            res.render('index',{blogs:blogs});
+        }
+    })
+    
+})
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
