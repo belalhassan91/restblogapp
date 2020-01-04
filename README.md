@@ -22,3 +22,10 @@ The Web Development BootCamp projects
 * Create Show View
 * Add Show routes
 * Style Show View
+
+# Blog Edit/ Update Routes
+* Create update View
+* Add edit form
+* Add edit routes
+* Add update route
+* Use method-override

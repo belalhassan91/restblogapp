@@ -1,4 +1,5 @@
 var bodyParser = require("body-parser"),
+    methodOverride = require("method-override"),
     mongoose = require("mongoose"),
     express = require("express"),
     app = express();
@@ -8,6 +9,7 @@ const ejs  = require('ejs');
 //-------------------------------------------------------------------    
 //Configure App
 mongoose.connect('mongodb://localhost:27017/blogapp', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.set('useFindAndModify', false);
 app.set('view engine', 'ejs'); 
 app.use(express.static("public")); //we can serve custom style sheets
 /** bodyParser.urlencoded(options)
@@ -19,6 +21,8 @@ app.use(bodyParser.urlencoded({extended: true}));
  * Parses the text as JSON and exposes the resulting object on req.body.
  */
 app.use(bodyParser.json());
+app.use(methodOverride('_method'))
+
 //------------------------------------------------------------------- 
 //Configure Mongoose
 var blogSchema = new mongoose.Schema({
@@ -84,6 +88,29 @@ app.get("/blogs/:id",(req,res)=>{
             res.redirect("/blogs");
         }else{
             res.render("show",{blog:foundBlog});
+        }
+    })
+})
+
+//Edit Routes
+app.get("/blogs/:id/edit",(req,res)=>{
+    Blog.findById(req.params.id,function(err,updateBlog){
+        if(err){
+            res.redirect("/blogs");
+        }else{
+            res.render("update",{blog:updateBlog});
+        }
+    })
+})
+
+//update route
+app.put("/blogs/:id",(req,res)=>{
+    Blog.findByIdAndUpdate(req.params.id,req.body.blog,function(err,updateBlog){
+        if(err){
+            res.render("index")
+        }else
+        {
+            res.redirect("/blogs/"+req.params.id)
         }
     })
 })
