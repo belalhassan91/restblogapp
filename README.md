@@ -5,4 +5,9 @@ The Web Development BootCamp projects
 * Setup the Blog App
 * Create the Blog model
 * Add INDEX route and template
-* Add Simple Nav Bar
+
+# Basic layout
+* Add Header and footer partials 
+* Include Semantic UI
+* Add Simple Navbar (Menu)
+* Add stylesheet to public directory
