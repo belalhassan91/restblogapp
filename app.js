@@ -75,8 +75,8 @@ app.post("/blogs",(req,res)=>{
         if(err){
             res.redirect("/blogs/new");
         }else{
-            console.log(newBlog)
-            res.redirect("/blogs")
+            console.log(newBlog);
+            res.redirect("/blogs");
         }
     })
 })
@@ -107,10 +107,22 @@ app.get("/blogs/:id/edit",(req,res)=>{
 app.put("/blogs/:id",(req,res)=>{
     Blog.findByIdAndUpdate(req.params.id,req.body.blog,function(err,updateBlog){
         if(err){
-            res.render("index")
+            res.render("index");
         }else
         {
-            res.redirect("/blogs/"+req.params.id)
+            res.redirect("/blogs/"+req.params.id);
+        }
+    })
+})
+
+//Delete Route
+app.delete("/blogs/:id",(req,res)=>{
+    Blog.findByIdAndRemove(req.params.id,function(err,deletedBlog){
+        if(err){
+            res.render("index");
+        }else
+        {
+            res.send("Blog is Deleted");
         }
     })
 })

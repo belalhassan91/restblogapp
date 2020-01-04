@@ -29,3 +29,9 @@ The Web Development BootCamp projects
 * Add edit routes
 * Add update route
 * Use method-override
+
+
+# Blog Destroy Routes
+* Add edit button
+* Add delete button
+* Add delete route
