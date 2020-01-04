@@ -49,6 +49,7 @@ app.get("/",(req,res) => {
     res.redirect("/blogs");
 })
 
+//INDEX Route
 app.get("/blogs",(req,res) => {
     Blog.find({},(err,blogs)=>{
         if(err){
@@ -59,4 +60,21 @@ app.get("/blogs",(req,res) => {
     })
     
 })
+
+//NEW Route
+app.get("/blogs/new", (req,res)=>{
+    res.render('new')
+})
+//Create Route
+app.post("/blogs",(req,res)=>{
+    Blog.create(req.body.blog,(err,newBlog)=>{
+        if(err){
+            res.redirect("/blogs/new");
+        }else{
+            console.log(newBlog)
+            res.redirect("/blogs")
+        }
+    })
+})
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

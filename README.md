@@ -11,3 +11,9 @@ The Web Development BootCamp projects
 * Include Semantic UI
 * Add Simple Navbar (Menu)
 * Add stylesheet to public directory
+
+# Blog New and Create
+* Add New and create routes
+* Create New.ejs with form
+* Put From data inside object **Blog**
+* Style form
