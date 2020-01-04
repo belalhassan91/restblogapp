@@ -17,3 +17,8 @@ The Web Development BootCamp projects
 * Create New.ejs with form
 * Put From data inside object **Blog**
 * Style form
+
+# Blog Show Routes
+* Create Show View
+* Add Show routes
+* Style Show View

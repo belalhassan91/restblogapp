@@ -77,4 +77,14 @@ app.post("/blogs",(req,res)=>{
     })
 })
 
+//Show Routes
+app.get("/blogs/:id",(req,res)=>{
+    Blog.findById(req.params.id,function(err,foundBlog){
+        if(err){
+            res.redirect("/blogs");
+        }else{
+            res.render("show",{blog:foundBlog});
+        }
+    })
+})
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
